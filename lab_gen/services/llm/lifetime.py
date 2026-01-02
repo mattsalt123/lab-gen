@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 import boto3
@@ -11,7 +12,7 @@ from langchain_community.llms.azureml_endpoint import AzureMLEndpointApiType
 from langchain_core.language_models import BaseChatModel, BaseLanguageModel
 from langchain_google_vertexai import ChatVertexAI, HarmBlockThreshold, HarmCategory
 from langchain_mistralai.chat_models import ChatMistralAI
-from langchain_openai import AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI, ChatOpenAI
 from loguru import logger
 
 from lab_gen.datatypes.errors import ModelKeyError
@@ -24,9 +25,11 @@ from lab_gen.datatypes.models import (
     Model,
     ModelFamily,
     ModelProvider,
+    ModelVariant,
 )
 from lab_gen.settings import settings
 
+GITHUB_MODELS_ENDPOINT = "https://models.github.ai/inference"
 
 MAX_TOKENS = 1536
 
@@ -182,12 +185,75 @@ def init_vertex_llm(model: Model) -> ChatVertexAI:
     return ChatVertexAI(**vertex_setup)
 
 
+def init_github_llm(model: Model, github_token: str) -> AzureChatOpenAI:
+    """
+    Initializes and returns a ChatOpenAI instance for GitHub Models.
+
+    Args:
+        model (Model): The model configuration.
+        github_token (str): The GitHub token for github models access.
+
+    Returns:
+        ChatOpenAI: The initialized GitHub Models LLM.
+    """
+    return ChatOpenAI(
+        model=model.identifier,
+        base_url=GITHUB_MODELS_ENDPOINT,
+        api_key=github_token,
+        streaming=True,
+    )
+
+
+def get_default_github_models() -> list[Model]:
+    """
+    Return default GitHub Models configuration for Codespaces.
+
+    These models are available in GitHub Models when running in a Codespace.
+    """
+    return [
+        Model(
+            provider=ModelProvider.GITHUB,
+            variant=ModelVariant.GENERAL,
+            family=ModelFamily.GPT,
+            identifier="openai/gpt-4.1",
+            description="OpenAI GPT-4.1 via GitHub Models",
+            location="GitHub",
+            config={},
+        ),
+        Model(
+            provider=ModelProvider.GITHUB,
+            variant=ModelVariant.ADVANCED,
+            family=ModelFamily.GPT,
+            identifier="openai/gpt-5",
+            description="OpenAI GPT-5 via GitHub Models",
+            location="GitHub",
+            config={},
+        ),
+    ]
+
+
 def init_models() -> None:
     """
     Loops through the model settings, for each model configures an LLM client.
 
     :param app: current fastapi application.
     """
+    # Check for GitHub Token
+    github_token = os.getenv("GITHUB_TOKEN")
+
+    if github_token is not None:
+        github_models = get_default_github_models()
+        for model in github_models:
+            key = model.key
+            llm = init_github_llm(model, github_token)
+            logger.debug(f"Configuring GitHub Models LLM for {key} {model.identifier}")
+            model_providers[key] = llm
+            models[key] = model
+
+        # Skip if just using GitHub Models
+        if not settings.models and not settings.models_vertex:
+            return
+
     modelz = settings.models + settings.models_vertex
     for model in modelz:
         if model.config is not None:
