@@ -29,8 +29,6 @@ from lab_gen.datatypes.models import (
 )
 from lab_gen.settings import settings
 
-GITHUB_MODELS_ENDPOINT = "https://models.github.ai/inference"
-
 MAX_TOKENS = 1536
 
 VERTEX_SAFETY_CONFIG = {
@@ -198,39 +196,10 @@ def init_github_llm(model: Model, github_token: str) -> AzureChatOpenAI:
     """
     return ChatOpenAI(
         model=model.identifier,
-        base_url=GITHUB_MODELS_ENDPOINT,
+        base_url=model.config["endpoint"],
         api_key=github_token,
         streaming=True,
     )
-
-
-def get_default_github_models() -> list[Model]:
-    """
-    Return default GitHub Models configuration for Codespaces.
-
-    These models are available in GitHub Models when running in a Codespace.
-    """
-    return [
-        Model(
-            provider=ModelProvider.GITHUB,
-            variant=ModelVariant.GENERAL,
-            family=ModelFamily.GPT,
-            identifier="openai/gpt-4.1",
-            description="OpenAI GPT-4.1 via GitHub Models",
-            location="GitHub",
-            config={},
-        ),
-        Model(
-            provider=ModelProvider.GITHUB,
-            variant=ModelVariant.ADVANCED,
-            family=ModelFamily.GPT,
-            identifier="openai/gpt-5",
-            description="OpenAI GPT-5 via GitHub Models",
-            location="GitHub",
-            config={},
-        ),
-    ]
-
 
 def init_models() -> None:
     """
@@ -238,21 +207,8 @@ def init_models() -> None:
 
     :param app: current fastapi application.
     """
-    # Check for GitHub Token
+    # Check for GitHub Token for use in Codespaces
     github_token = os.getenv("GITHUB_TOKEN")
-
-    if github_token is not None:
-        github_models = get_default_github_models()
-        for model in github_models:
-            key = model.key
-            llm = init_github_llm(model, github_token)
-            logger.debug(f"Configuring GitHub Models LLM for {key} {model.identifier}")
-            model_providers[key] = llm
-            models[key] = model
-
-        # Skip if just using GitHub Models
-        if not settings.models and not settings.models_vertex:
-            return
 
     modelz = settings.models + settings.models_vertex
     for model in modelz:
@@ -280,6 +236,9 @@ def init_models() -> None:
                     llm = HuggingFaceEndpoint(
                         streaming=True,
                         repo_id=config.repo_id, huggingfacehub_api_token=config.access_token)
+                case ModelProvider.GITHUB:
+                    if github_token is not None:
+                        llm = init_github_llm(model, github_token)
             if llm is not None:
                 logger.debug(f"Configuring LLM for {key} {model.identifier}")
                 model_providers[key] = llm

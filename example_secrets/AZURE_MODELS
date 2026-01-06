@@ -1,147 +1,169 @@
 [
   {
-    "provider": "AZURE",
+    "provider": "GITHUB",
     "variant": "GENERAL",
     "family": "GPT",
-    "identifier": "gpt-35-1106",
-    "description": "OpenAI GPT-3.5 Turbo powered",
+    "identifier": "openai/gpt-4.1",
+    "description": "OpenAI GPT-4.1 powered",
     "location": "UK",
     "config": {
-      "AZURE_OPENAI_API_KEY": "222264a05a111111",
-      "AZURE_OPENAI_ENDPOINT": "https://my-app-south.openai.azure.com/",
-      "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
+      "endpoint": "https://models.github.ai/inference"
     }
   },
   {
     "provider": "AZURE",
     "variant": "ADVANCED",
     "family": "GPT",
-    "identifier": "gpt-4-1106",
-    "description": "OpenAI GPT-4",
+    "identifier": "openai/gpt-5",
+    "description": "OpenAI GPT-5 powered",
     "location": "UK",
     "config": {
-      "AZURE_OPENAI_API_KEY": "222264a05a111111",
-      "AZURE_OPENAI_ENDPOINT": "https://my-app-south.openai.azure.com/",
-      "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
-    }
-  },
-  {
-    "provider": "AZURE",
-    "variant": "MULTIMODAL",
-    "family": "GPT",
-    "identifier": "gpt-4-vision",
-    "description": "OpenAI GPT-4",
-    "location": "Sweden",
-    "config": {
-      "AZURE_OPENAI_API_KEY": "222264a05a111111",
-      "AZURE_OPENAI_ENDPOINT": "https://my-app-sweden.openai.azure.com/",
-      "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
-    }
-  },
-  {
-    "provider": "AZURE",
-    "variant": "EXPERIMENTAL",
-    "family": "MISTRAL",
-    "identifier": "mistral-large-deployment",
-    "description": "Mistral Large",
-    "location": "USA",
-    "config": {
-      "AZUREAI_API_KEY": "4237538754gwdjgkfjg38323",
-      "AZUREAI_ENDPOINT": "https://Mistral-large-deployment-serverless.eastus.inference.ai.azure.com"
-    }
-  },
-  {
-    "provider": "AZURE",
-    "variant": "EXPERIMENTAL",
-    "family": "LLAMA",
-    "identifier": "Meta-Llama-3-70B-Instruct-deployment",
-    "description": "Llama 3 is Llama's fastest, most compact model for near-instant responsiveness",
-    "location": "Sweden",
-    "config": {
-      "AZUREAI_API_KEY": "sfgsgsh2423427hfghf",
-      "AZUREAI_ENDPOINT": "https://Meta-Llama-3-70B-Instruct-deployment-serverless.swedencentral.inference.ai.azure.com/v1/chat/completions"
-    }
-  },
-
-  {
-    "provider": "AZURE",
-    "variant": "EXPERIMENTAL",
-    "family": "PHI",
-    "identifier": "PHI-3-medium-128k-instruct-deployment",
-    "description": "PHI 3 is Microsoft's fastest, most compact model for near-instant responsiveness",
-    "location": "Sweden",
-    "config": {
-      "AZUREAI_API_KEY": "rthiuer56456htiuehriut",
-      "AZUREAI_ENDPOINT": "https://Phi-3-medium-128k-instruct-deployment-serverless.swedencentral.inference.ai.azure.com/v1/chat/completions"
-    }
-  },
-  {
-    "provider": "BEDROCK",
-    "variant": "GENERAL",
-    "family": "CLAUDE",
-    "identifier": "anthropic.claude-instant-v1",
-    "description": "anthropic.claude-instant",
-    "location": "Frankfurt",
-    "config": {
-      "AWS_REGION": "eu-central-1",
-      "AWS_ACCESS_KEY_ID": "IMVZ111111",
-      "AWS_SECRET_ACCESS_KEY": "3cSofg111111"
-    }
-  },
-  {
-    "provider": "ANTHROPIC",
-    "variant": "GENERAL",
-    "family": "CLAUDE",
-    "identifier": "claude-3-5-sonnet-20240620",
-    "description": "Claude 3.5 Sonnet 20240620",
-    "location": "Unknown",
-    "config": {
-      "ANTHROPIC_API_KEY": "sk-ant-LzNjZS1hZG1pbg=="
-    }
-  },
-  {
-    "provider": "HUGGINGFACE",
-    "variant": "GENERAL",
-    "family": "MISTRAL",
-    "identifier": "Mixtral-8x7b-Instruct-v0.1",
-    "description": "Mixtral 8x7b Instruct-v0.1",
-    "location": "Unknown",
-    "config": {
-      "HF_TOKEN": "klGYov",
-      "HF_REPO_ID": "mistralai/Mixtral-8x7B-Instruct-v0.1"
-    }
-  },
-  {
-    "provider": "HUGGINGFACE",
-    "variant": "ADVANCED",
-    "family": "UNSPECIFIED",
-    "identifier": "Llama-2-70b",
-    "description": "Llama 2 70 billion parameters",
-    "location": "Unknown",
-    "config": {
-      "HF_TOKEN": "klGYov",
-      "HF_REPO_ID": "meta-llama/Llama-2-70b-chat-hf"
-    }
-  },
-  {
-    "provider": "VERTEX",
-    "variant": "GENERAL",
-    "family": "GEMINI",
-    "identifier": "gemini-pro",
-    "description": "Google's Gemini Pro, designed to handle natural language tasks, multi-turn text and chat.",
-    "location": "USA",
-    "config": {
-      "type": "service_account",
-      "project_id": "my-app",
-      "private_key_id": "3cSofg111111",
-      "private_key": "-----BEGIN PRIVATE KEY-----\nIEvQIBADAMJWeQUXGn=\n-----END PRIVATE KEY-----\n",
-      "client_email": "gen-ai-vertex@my-app.iam.gserviceaccount.com",
-      "client_id": "222207",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://oauth2.googleapis.com/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gen-ai-vertex%40my-app.iam.gserviceaccount.com",
-      "universe_domain": "googleapis.com"
+      "endpoint": "https://models.github.ai/inference"
     }
   }
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "GENERAL",
+  //   "family": "GPT",
+  //   "identifier": "gpt-35-1106",
+  //   "description": "OpenAI GPT-3.5 Turbo powered",
+  //   "location": "UK",
+  //   "config": {
+  //     "AZURE_OPENAI_API_KEY": "222264a05a111111",
+  //     "AZURE_OPENAI_ENDPOINT": "https://my-app-south.openai.azure.com/",
+  //     "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
+  //   }
+  // },
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "ADVANCED",
+  //   "family": "GPT",
+  //   "identifier": "gpt-4-1106",
+  //   "description": "OpenAI GPT-4",
+  //   "location": "UK",
+  //   "config": {
+  //     "AZURE_OPENAI_API_KEY": "222264a05a111111",
+  //     "AZURE_OPENAI_ENDPOINT": "https://my-app-south.openai.azure.com/",
+  //     "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
+  //   }
+  // },
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "MULTIMODAL",
+  //   "family": "GPT",
+  //   "identifier": "gpt-4-vision",
+  //   "description": "OpenAI GPT-4",
+  //   "location": "Sweden",
+  //   "config": {
+  //     "AZURE_OPENAI_API_KEY": "222264a05a111111",
+  //     "AZURE_OPENAI_ENDPOINT": "https://my-app-sweden.openai.azure.com/",
+  //     "AZURE_OPENAI_API_VERSION": "2023-07-01-preview"
+  //   }
+  // },
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "EXPERIMENTAL",
+  //   "family": "MISTRAL",
+  //   "identifier": "mistral-large-deployment",
+  //   "description": "Mistral Large",
+  //   "location": "USA",
+  //   "config": {
+  //     "AZUREAI_API_KEY": "4237538754gwdjgkfjg38323",
+  //     "AZUREAI_ENDPOINT": "https://Mistral-large-deployment-serverless.eastus.inference.ai.azure.com"
+  //   }
+  // },
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "EXPERIMENTAL",
+  //   "family": "LLAMA",
+  //   "identifier": "Meta-Llama-3-70B-Instruct-deployment",
+  //   "description": "Llama 3 is Llama's fastest, most compact model for near-instant responsiveness",
+  //   "location": "Sweden",
+  //   "config": {
+  //     "AZUREAI_API_KEY": "sfgsgsh2423427hfghf",
+  //     "AZUREAI_ENDPOINT": "https://Meta-Llama-3-70B-Instruct-deployment-serverless.swedencentral.inference.ai.azure.com/v1/chat/completions"
+  //   }
+  // },
+
+  // {
+  //   "provider": "AZURE",
+  //   "variant": "EXPERIMENTAL",
+  //   "family": "PHI",
+  //   "identifier": "PHI-3-medium-128k-instruct-deployment",
+  //   "description": "PHI 3 is Microsoft's fastest, most compact model for near-instant responsiveness",
+  //   "location": "Sweden",
+  //   "config": {
+  //     "AZUREAI_API_KEY": "rthiuer56456htiuehriut",
+  //     "AZUREAI_ENDPOINT": "https://Phi-3-medium-128k-instruct-deployment-serverless.swedencentral.inference.ai.azure.com/v1/chat/completions"
+  //   }
+  // },
+  // {
+  //   "provider": "BEDROCK",
+  //   "variant": "GENERAL",
+  //   "family": "CLAUDE",
+  //   "identifier": "anthropic.claude-instant-v1",
+  //   "description": "anthropic.claude-instant",
+  //   "location": "Frankfurt",
+  //   "config": {
+  //     "AWS_REGION": "eu-central-1",
+  //     "AWS_ACCESS_KEY_ID": "IMVZ111111",
+  //     "AWS_SECRET_ACCESS_KEY": "3cSofg111111"
+  //   }
+  // },
+  // {
+  //   "provider": "ANTHROPIC",
+  //   "variant": "GENERAL",
+  //   "family": "CLAUDE",
+  //   "identifier": "claude-3-5-sonnet-20240620",
+  //   "description": "Claude 3.5 Sonnet 20240620",
+  //   "location": "Unknown",
+  //   "config": {
+  //     "ANTHROPIC_API_KEY": "sk-ant-LzNjZS1hZG1pbg=="
+  //   }
+  // },
+  // {
+  //   "provider": "HUGGINGFACE",
+  //   "variant": "GENERAL",
+  //   "family": "MISTRAL",
+  //   "identifier": "Mixtral-8x7b-Instruct-v0.1",
+  //   "description": "Mixtral 8x7b Instruct-v0.1",
+  //   "location": "Unknown",
+  //   "config": {
+  //     "HF_TOKEN": "klGYov",
+  //     "HF_REPO_ID": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+  //   }
+  // },
+  // {
+  //   "provider": "HUGGINGFACE",
+  //   "variant": "ADVANCED",
+  //   "family": "UNSPECIFIED",
+  //   "identifier": "Llama-2-70b",
+  //   "description": "Llama 2 70 billion parameters",
+  //   "location": "Unknown",
+  //   "config": {
+  //     "HF_TOKEN": "klGYov",
+  //     "HF_REPO_ID": "meta-llama/Llama-2-70b-chat-hf"
+  //   }
+  // },
+  // {
+  //   "provider": "VERTEX",
+  //   "variant": "GENERAL",
+  //   "family": "GEMINI",
+  //   "identifier": "gemini-pro",
+  //   "description": "Google's Gemini Pro, designed to handle natural language tasks, multi-turn text and chat.",
+  //   "location": "USA",
+  //   "config": {
+  //     "type": "service_account",
+  //     "project_id": "my-app",
+  //     "private_key_id": "3cSofg111111",
+  //     "private_key": "-----BEGIN PRIVATE KEY-----\nIEvQIBADAMJWeQUXGn=\n-----END PRIVATE KEY-----\n",
+  //     "client_email": "gen-ai-vertex@my-app.iam.gserviceaccount.com",
+  //     "client_id": "222207",
+  //     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  //     "token_uri": "https://oauth2.googleapis.com/token",
+  //     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  //     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gen-ai-vertex%40my-app.iam.gserviceaccount.com",
+  //     "universe_domain": "googleapis.com"
+  //   }
+  // }
 ]
