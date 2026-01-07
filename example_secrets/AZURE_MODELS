@@ -11,7 +11,7 @@
     }
   },
   {
-    "provider": "AZURE",
+    "provider": "GITHUB",
     "variant": "ADVANCED",
     "family": "GPT",
     "identifier": "openai/gpt-5",
