@@ -1,6 +1,42 @@
 # CHANGELOG
 
 
+## v0.6.0 (2025-11-28)
+
+### Bug Fixes
+
+* fix: ET-1648: Fix Gemini models by removing max_tokens ([`af686ee`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/af686eecab55a4d51d83c9b013ff92811f8491c3))
+
+### Features
+
+* feat: ET-1709: Add support for new Azure OpenAI models ([`6b2142e`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/6b2142e6bc29592474570aab72386ac365fa540e))
+
+## v0.5.0 (2025-11-17)
+
+### Bug Fixes
+
+* fix: ET-1680: Update trigger branches in azure-pipelines.yml to include only 'main' ([`6634dd8`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/6634dd8cf2acf699014ea9ed2de1e46abe64ce3a))
+
+* fix: ET-1645: Improve Mermaid prompt and update Azure models ([`d59222f`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/d59222f43ec1344cd03070784d2450a2ad4cf74a))
+
+### Chores
+
+* chore(deps): update all non-major updates (main) ([`2e22865`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/2e228658f59d90fde2d421639a64c227ef7f7a17))
+
+### Features
+
+* feat: ET-1697: Updated message to have parts for chat ([`2dada84`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/2dada84736cf8295964ac2647072fb28d0c65b54))
+
+* feat: ET-1680: add renovate branch to trigger build ([`bc7894d`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/bc7894dcc435fbe5a87fbb241cc5dcd35da2b9a5))
+
+* feat: ET-1680: add renovate.json file ([`1edffcd`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/1edffcdc5d92c08bcc0492ed71185efcfadb0303))
+
+## v0.4.0 (2025-04-14)
+
+### Features
+
+* feat: ET-1634: Add conference talk prompt template ([`e71adee`](https://dev.azure.com/DvlaEmergingTech/lab-gen/_git/lab-gen-api/commit/e71adeef84c35ee3d68f3d61d04cda1bd21ab1fb))
+
 ## v0.3.0 (2025-03-25)
 
 ### Features

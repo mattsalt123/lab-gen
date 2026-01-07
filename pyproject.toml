@@ -1,6 +1,6 @@
 [project]
 name = "lab-gen-api"
-version = "0.3.0"
+version = "0.6.0"
 description = "DVLA Emerging Tech Lab Generative AI project"
 requires-python = ">=3.11"
 dependencies = [

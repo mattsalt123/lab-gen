@@ -1,4 +1,3 @@
-
 from collections.abc import AsyncGenerator
 from typing import Annotated
 
@@ -7,6 +6,7 @@ import tiktoken
 from fastapi import Depends, HTTPException, Header
 from fastapi.responses import StreamingResponse
 from fastapi.routing import APIRouter
+from langchain_core.messages import SystemMessage
 from loguru import logger
 from pydantic import BaseModel, Field
 from slowapi import Limiter
@@ -30,6 +30,26 @@ limiter = Limiter(key_func=get_remote_address)
 encoding = tiktoken.get_encoding("cl100k_base")
 
 
+class DataPartValue(BaseModel):
+    """Represents the value of a data part."""
+
+    message: str
+
+
+class DataPart(BaseModel):
+    """Represents a data part of a message."""
+
+    type: str
+    data: DataPartValue
+
+
+class TextPart(BaseModel):
+    """Represents a text part of a message."""
+
+    type: str = "text"
+    text: str
+
+
 class Message(BaseModel):
     """
     Represents a message in the chat conversation.
@@ -41,7 +61,7 @@ class Message(BaseModel):
             Defaults to "user".
     """
 
-    content: str = "Ask me something"
+    parts: list[TextPart | DataPart] = [TextPart(type="text", text="Ask me something")]
     """The contents of the message."""
 
     role: str = "user"
@@ -59,6 +79,24 @@ class Chat(BaseModel):
 
     modelKey: str = Field(DEFAULT_MODEL_KEY)  # noqa: N815
     messages: list[Message]
+
+
+def get_messages(chat: Chat, prompt_tokens: int) -> list[SystemMessage]:
+    """Dependency to get messages."""
+    messages = [SYSTEM_MESSAGE]
+    for message in chat.messages:
+        full_message = ""
+        for part in message.parts:
+            if isinstance(part, TextPart):
+                prompt_tokens += len(encoding.encode(part.text))
+                full_message += part.text
+            elif isinstance(part, DataPart):
+                prompt_tokens += len(encoding.encode(part.data.message))
+                full_message += part.data.message
+
+        messages.append((message.role, full_message))
+
+    return messages
 
 
 @router.get("/models/")
@@ -114,10 +152,7 @@ async def chat_handler(
         completion_tokens_counter = app.state.completion_tokens_counter
 
         # Calculate the number of tokens in the prompt
-        messages = [SYSTEM_MESSAGE]
-        for message in chat.messages:
-            prompt_tokens += len(encoding.encode(message.content))
-            messages.append((message.role, message.content))
+        messages = get_messages(chat, prompt_tokens)
 
         try:
             client = get_llm(chat.modelKey)

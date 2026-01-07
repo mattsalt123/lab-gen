@@ -115,9 +115,7 @@ def init_azure_llm(model: Model) -> BaseChatModel:
     config = AzureModelConfig(**model.config)
     return AzureChatOpenAI(
         verbose=True,
-        temperature=0,
         azure_deployment=model.identifier,
-        max_tokens=MAX_TOKENS,
         api_version=config.api_version,
         azure_endpoint=config.endpoint,
         api_key=config.api_key,
@@ -173,7 +171,6 @@ def init_vertex_llm(model: Model) -> ChatVertexAI:
         "credentials": credentials,
         "model_name": model.identifier,
         "project": model.config["project_id"],
-        "max_output_tokens": MAX_TOKENS,
         "streaming": True,
         "safety_settings": VERTEX_SAFETY_CONFIG,
         "convert_system_message_to_human": True,

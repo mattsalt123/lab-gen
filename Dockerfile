@@ -3,7 +3,7 @@ ARG VERSION=3.11
 FROM python:${VERSION}-${VARIANT} AS builder
 
 # Install UV
-COPY --from=ghcr.io/astral-sh/uv:0.6.8 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.8.23 /uv /uvx /bin/
 
 RUN groupadd -g 10001 genapp && \
     useradd -u 10000 -g genapp genapp
