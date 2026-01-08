@@ -1,4 +1,3 @@
-import os
 from typing import Any
 
 import boto3
@@ -204,8 +203,6 @@ def init_models() -> None:
 
     :param app: current fastapi application.
     """
-    # Check for GitHub Token for use in Codespaces
-    github_token = os.getenv("GITHUB_TOKEN")
 
     modelz = settings.models + settings.models_vertex
     for model in modelz:
@@ -234,6 +231,9 @@ def init_models() -> None:
                         streaming=True,
                         repo_id=config.repo_id, huggingfacehub_api_token=config.access_token)
                 case ModelProvider.GITHUB:
+                    # Check for GitHub Token for use in Codespaces
+                    github_token = settings.github_token
+
                     if github_token is not None:
                         llm = init_github_llm(model, github_token)
             if llm is not None:

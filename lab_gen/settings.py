@@ -136,6 +136,7 @@ class Settings(BaseSettings):
     azure_monitor_connection_string: str | None = Field(default=None, alias="APPLICATIONINSIGHTS_CONNECTION_STRING")
     models: list[Model] = Field(alias="AZURE_MODELS")
     models_vertex: list[Model] = Field(default=[], alias="AZURE_MODELS_VERTEX")
+    github_token: str | None = Field(default=None, alias="GITHUB_TOKEN")
 
     session_store_uri: str
     session_store_key: str
