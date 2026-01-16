@@ -20,6 +20,7 @@ class ModelProvider(Enum):
     BEDROCK = "BEDROCK"
     VERTEX = "VERTEX"
     HUGGINGFACE = "HUGGINGFACE"
+    GITHUB = "GITHUB"
 
 
 class ModelFamily(Enum):

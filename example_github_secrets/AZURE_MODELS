@@ -1,0 +1,24 @@
+[
+  {
+    "provider": "GITHUB",
+    "variant": "GENERAL",
+    "family": "GPT",
+    "identifier": "openai/gpt-4.1",
+    "description": "OpenAI GPT-4.1 powered",
+    "location": "UK",
+    "config": {
+      "endpoint": "https://models.github.ai/inference"
+    }
+  },
+  {
+    "provider": "GITHUB",
+    "variant": "ADVANCED",
+    "family": "GPT",
+    "identifier": "openai/gpt-5",
+    "description": "OpenAI GPT-5 powered",
+    "location": "UK",
+    "config": {
+      "endpoint": "https://models.github.ai/inference"
+    }
+  }
+]

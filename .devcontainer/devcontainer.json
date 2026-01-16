@@ -50,7 +50,7 @@
             "label": "Local Dev Server"
         }
     },
-    "onCreateCommand": "cp -n example.env .env && pipx install uv",
+    "onCreateCommand": "cp -n example.env .env && pipx install uv && cp -r example_github_secrets secrets",
     "updateContentCommand": "uv sync",
     "remoteUser": "vscode",
     "hostRequirements": {
